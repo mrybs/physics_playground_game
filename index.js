@@ -51,7 +51,7 @@ function render(){
     ctx.closePath()
     physical_objects.forEach(po => {
         ctx.beginPath()
-        ctx.fillStyle = '#ffffff5f'
+        ctx.fillStyle = '#ffffed5f'
         ctx.ellipse(po.pos.x, po.pos.y, po.radius, po.radius, 0, 0, Math.PI*2)
         ctx.fill()
     })
@@ -60,7 +60,8 @@ function render(){
 function tick(){
     if(!ticking) return render()
     let physical_objects_new = []
-    physical_objects.forEach(spo => {
+    physical_objects.forEach(_spo => {
+        let spo = new PhysicalObject(_spo.pos, _spo.vel, _spo.mass, _spo.radius)
         physical_objects.forEach(opo => {
             /*let dir_accel = spo.pos.norm_dir(opo.pos)
             let abs_accel = 0
@@ -88,6 +89,7 @@ function tick(){
         spo.pos = spo.pos.sum(spo.vel)
         physical_objects_new.push(spo)
     })
+    physical_objects = physical_objects_new
     render()
 }
 
